@@ -74,8 +74,25 @@ struct WaveletTree {
             return _kth(v[i].r, r - v[i].goL[r], k - v[i].goL[r]);
     }
 
-    int kth(int r, int k) {
+    int kth(int r, int k) { // kth number in [0, r)
         return _kth(0, r, k);
+    }
+
+    int _less_than(int i, int x, int r, int lb, int rb) {
+        if (v[i].l == -1) {
+            if (v[i].vals.empty() || v[i].vals[0] >= x) return 0;
+            else return r;
+        }
+        int mid = (lb + rb) / 2;
+        if (x <= mid)
+            return _less_than(v[i].l, x, v[i].goL[r], lb, mid);
+        else
+            return v[i].goL[r] +
+                _less_than(v[i].r, x, r - v[i].goL[r], mid, rb);
+    }
+
+    int less_than(int x, int r) { // number of values less than x in [0, r)
+        return _less_than(0, x, r, 0, n);
     }
 };
 
