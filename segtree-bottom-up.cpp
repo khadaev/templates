@@ -49,6 +49,7 @@ struct SegmentTreeBottomUp {
             a[i] = combine(a[2 * i], a[2 * i + 1]);
     }
 
+#ifdef COMMUTE
     T get(int l, int r) {
         T res = DEFAULT;
         l += N, r += N;
@@ -62,6 +63,21 @@ struct SegmentTreeBottomUp {
         }
         return res;
     }
+#else
+    T get(int l, int r) {
+        T res_l = DEFAULT, res_r = DEFAULT;
+        l += N, r += N;
+        while (l < r) {
+            if (l % 2)
+                res_l = combine(res_l, a[l++]);
+            if (r % 2)
+                res_r = combine(a[--r], res_r);
+            l /= 2;
+            r /= 2;
+        }
+        return combine(res_l, res_r);
+    }
+#endif // COMMUTE
 
     void set(int pos, T val) {
         pos += N;

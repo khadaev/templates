@@ -46,6 +46,19 @@ struct FenwickTree {
         for (; pos < n; pos |= (pos + 1))
             bit[pos] += val;
     }
+
+    int kth(int k) { // k from zero
+        int pw = 1 << 21, pos = 0;
+        while (pw > 1) {
+            pw >>= 1;
+            int x = pos + pw - 1;
+            if (x < n && bit[x] <= k) {
+                k -= bit[x];
+                pos += pw;
+            }
+        }
+        return pos;
+    }
 };
 
 int main() {
