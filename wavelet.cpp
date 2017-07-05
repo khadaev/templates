@@ -78,6 +78,18 @@ struct WaveletTree {
         return _kth(0, r, k);
     }
 
+    int _kth(int i, int l, int r, int k) {
+        if (v[i].l == -1) return v[i].vals[0];
+        if (v[i].goL[r] - v[i].goL[l] > k)
+            return _kth(v[i].l, v[i].goL[l], v[i].goL[r], k);
+        else
+            return _kth(v[i].r, l - v[i].goL[l], r - v[i].goL[r], k - v[i].goL[r] + v[i].goL[l]);
+    }
+
+    int kth(int l, int r, int k) { // kth number from [l, r)
+        return _kth(0, l, r, k);
+    }
+
     int _less_than(int i, int x, int r, int lb, int rb) {
         if (v[i].l == -1) {
             if (v[i].vals.empty() || v[i].vals[0] >= x) return 0;
