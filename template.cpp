@@ -20,6 +20,16 @@ using ld = long double;
 const ld M_PI = acos(-1.0);
 #endif
 
+template<typename T>
+inline void setmax(T& a, T b) {
+    if (a < b) a = b;
+}
+
+template<typename T>
+inline void setmin(T& a, T b) {
+    if (a > b) a = b;
+}
+
 const ld eps = 1e-9;
 const int INF = 2000000000;
 const ll LINF = 1ll * INF * INF;

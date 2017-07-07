@@ -1,30 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-using ll = long long;
-using ull = unsigned long long;
-using ld = long double;
-
-#define forn(i, a, n) for (int i = (int)(a); i < (int)(n); ++i)
-#define ford(i, a, n) for (int i = (int)(n - 1); i >= (int)(a); --i)
-#define fore(i, a, n) for (int i = (int)(a); i <= (int)(n); ++i)
-#define all(a) (a).begin(), (a).end()
-#define fs first
-#define sn second
-#define trace(a)\
-    for (auto i : a) cerr << i << ' ';\
-    cerr << '\n'
-#define eb emplace_back
-
-#ifndef M_PI
-const ld M_PI = acos(-1.0);
-#endif
-
-const ld eps = 1e-9;
-const int INF = 2000000000;
-const ll LINF = 1ll * INF * INF;
-const ll MOD = 1000000007;
-
 const int N = 1 << 20;
 using T = int;
 inline T combine(T a, T b) {
@@ -36,16 +12,16 @@ T a[2 * N];
 struct SegmentTreeBottomUp {
 
     SegmentTreeBottomUp () {
-        forn(i, 0, 2 * N)
+        for (int i = 0; i < 2 * N; ++i)
             a[i] = DEFAULT;
     };
 
     SegmentTreeBottomUp (vector<T> _a) {
-        forn(i, 0, (int)_a.size())
+        for (int i = 0; i < (int)_a.size(); ++i)
             a[i + N] = _a[i];
-        forn(i, (int)_a.size(), N)
+        for (int i = 0; i < N; ++i)
             a[i + N] = DEFAULT;
-        ford(i, 1, N)
+        for (int i = N - 1; i >= 0; --i)
             a[i] = combine(a[2 * i], a[2 * i + 1]);
     }
 
