@@ -49,8 +49,31 @@ namespace SuffixArray {
         }
         return p;
     }
+
+    int lcp[maxlen], pos[maxlen];
+    int* build_lcp(string s) {
+        s += "$";
+        int n = (int)s.length();
+        for (int i = 0; i < n; ++i)
+            pos[p[i]] = i;
+        int k = 0;
+        for (int i = 0; i < n; ++i) {
+            if (k) --k;
+            if (pos[i] == n - 1) {
+                lcp[n - 1] = -1;
+                k = 0;
+            } else {
+                int j = p[pos[i] + 1];
+                while (max(i, j) + k < n && s[i + k] == s[j + k])
+                    ++k;
+                lcp[pos[i]] = k;
+            }
+        }
+        return lcp;
+    }
 }
 using SuffixArray::build;
+using SuffixArray::build_lcp;
 
 int main() {
     ios::sync_with_stdio(false);
