@@ -3,6 +3,7 @@ using namespace std;
 
 using base = complex<double>;
 const int MAXN = 1 << 18;
+base _a[MAXN], _b[MAXN], _c[MAXN];
 namespace fft {
     int rev[MAXN];
     base wlen_pw[MAXN];
@@ -40,15 +41,41 @@ namespace fft {
                 a[i] /= n;
     }
     
-    void calc_rev (int n, int log_n) {
+    void calc_rev (int n) {
+        int lg = 1;
+        while ((1 << lg) < n) ++lg;
         for (int i = 0; i < n; ++i) {
             rev[i] = 0;
-            for (int j = 0; j < log_n; ++j)
+            for (int j = 0; j < lg; ++j)
                 if (i & (1 << j))
-                    rev[i] |= 1 << (log_n - 1 - j);
+                    rev[i] |= 1 << (lg - 1 - j);
         }
     }
+
+    vector<int> multiply(vector<int> a, vector<int> b) {
+        int n = 1;
+        while (n < max(a.size(), b.size()))
+            n *= 2;
+        n *= 2;
+        calc_rev(n);
+        for (int i = 0; i < n; ++i)
+            _a[i] = 0, _b[i] = 0;
+        for (int i = 0; i < (int)a.size(); ++i)
+            _a[i] = a[i];
+        for (int i = 0; i < (int)b.size(); ++i)
+            _b[i] = b[i];
+        fft(_a, n, false);
+        fft(_b, n, false);
+        for (int i = 0; i < n; ++i)
+            _c[i] = _a[i] * _b[i];
+        fft(_c, n, true);
+        vector<int> ans(n);
+        for (int i = 0; i < n; ++i)
+            ans[i] = int(_c[i].real() + 0.5);
+        return ans;
+    }
 }
+using fft::multiply;
 
 int main() {
     ios::sync_with_stdio(false);
