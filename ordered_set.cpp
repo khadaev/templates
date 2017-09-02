@@ -4,12 +4,14 @@
 
 using namespace std;
 using namespace __gnu_pbds;
-using ordered_set = tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
+
+template<typename T>
+using ordered_set = tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>;
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
-    ordered_set S;
+    ordered_set<int> S;
     S.insert(1);
     S.insert(3);
     cout << S.order_of_key(2) << '\n';
