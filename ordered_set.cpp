@@ -15,5 +15,7 @@ int main() {
     S.insert(1);
     S.insert(3);
     cout << S.order_of_key(2) << '\n';
+    cout << S.order_of_key(3) << '\n';
+    cout << S.order_of_key(4) << '\n';
     cout << *S.find_by_order(1) << '\n';
 }

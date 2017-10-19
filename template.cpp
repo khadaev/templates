@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx")
 using namespace std;
 
 using ll = long long;
@@ -6,7 +8,7 @@ using ull = unsigned long long;
 using ld = long double;
 
 #define forn(i, a, n) for (int i = (int)(a); i < (int)(n); ++i)
-#define ford(i, a, n) for (int i = (int)(n - 1); i >= (int)(a); --i)
+#define ford(i, a, n) for (int i = (int)(n) - 1; i >= (int)(a); --i)
 #define fore(i, a, n) for (int i = (int)(a); i <= (int)(n); ++i)
 #define all(a) (a).begin(), (a).end()
 #define fs first
