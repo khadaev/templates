@@ -33,6 +33,28 @@ inline void setmin(T& a, T b) {
     if (a > b) a = b;
 }
 
+template<typename T, typename S>
+istream& operator>> (istream& in, pair<S, T>& p) {
+    in >> p.fs >> p.sn;
+    return in;
+}
+template<typename T, typename S>
+ostream& operator<< (ostream& out, pair<S, T>& p) {
+    out << p.fs << ' ' << p.sn << ' ';
+    return out;
+}
+
+template<typename T>
+istream& operator>> (istream& in, vector<T>& v) {
+    for (T& x : v) in >> x;
+    return in;
+}
+template<typename T>
+ostream& operator<< (ostream& out, vector<T>& v) {
+    for (T& x : v) out << x << ' ';
+    return out;
+}
+
 const ld eps = 1e-9;
 const int INF = 2000000000;
 const ll LINF = 1ll * INF * INF;
