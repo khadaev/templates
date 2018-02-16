@@ -21,6 +21,8 @@ ll Inv(ll x) {
 struct Mod {
     ll x;
 
+    Mod () {}
+
     Mod (ll _x) {
         x = _x % MOD;
         if (x < 0) x += MOD;
@@ -29,17 +31,17 @@ struct Mod {
     Mod operator+ (Mod rhs) {
         ll ans = x + rhs.x;
         if (ans >= MOD) ans -= MOD;
-        return Mod(ans);
+        Mod ret; ret.x = ans; return ret;
     }
 
     Mod operator- (Mod rhs) {
         ll ans = x - rhs.x;
         if (ans < 0) ans += MOD;
-        return Mod(ans);
+        Mod ret; ret.x = ans; return ret;
     }
 
     Mod operator* (Mod rhs) {
-        return Mod(x * rhs.x % MOD);
+        Mod ret; ret.x = x * rhs.x % MOD; return ret;
     }
 
     Mod operator+= (Mod rhs) {
@@ -61,7 +63,7 @@ struct Mod {
     }
 
     Mod operator^ (ll a) {
-        return Mod(Pow(x, a));
+        Mod ret; ret.x = Pow(x, a); return ret;
     }
 
     Mod operator^= (ll a) {
@@ -70,7 +72,7 @@ struct Mod {
     }
 
     Mod inv() {
-        return Mod(Inv(x));
+        Mod ret; ret.x = Inv(x); return ret;
     }
 
     Mod operator/ (Mod rhs) {
