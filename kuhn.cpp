@@ -49,6 +49,7 @@ namespace Kuhn {
 }
 using Kuhn::add_edge;
 using Kuhn::run_kuhn;
+using Kuhn::init;
 
 int main() {
     ios::sync_with_stdio(false);
